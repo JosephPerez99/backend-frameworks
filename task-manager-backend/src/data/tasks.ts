@@ -12,5 +12,11 @@ export const tasks: Task[] = [
     title: 'Practicar TypeScript',
     status: 'pending',
     createdAt: new Date()
+  },
+  {
+    id: 3,
+    title: 'Practicar TypeScript',
+    status: 'canceled',
+    createdAt: new Date()
   }
 ];

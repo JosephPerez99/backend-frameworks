@@ -20,7 +20,7 @@ const showTasks = (): void => {
   console.table(rows);
 };
 
-const main = async (): Promise<void> => {
+const main = async () => {
   console.log(`\n${getAppName()}`);
   console.log('Iniciando aplicación...');
 
