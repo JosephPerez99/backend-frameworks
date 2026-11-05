@@ -32,6 +32,38 @@ export const validateTaskTitle = (
     return;
   }
 
+  const description: unknown = req.body?.description;
+  let normalizedDescription: string | undefined;
+
+  if (description !== undefined) {
+    if (typeof description !== 'string') {
+      next(
+        new AppError(
+          'La solicitud contiene datos inválidos.',
+          422,
+          'VALIDATION_ERROR',
+          [{ field: 'description', message: 'Debe ser texto.' }]
+        )
+      );
+      return;
+    }
+
+    normalizedDescription = description.trim();
+
+    if (normalizedDescription.length > 300) {
+      next(
+        new AppError(
+          'La solicitud contiene datos inválidos.',
+          422,
+          'VALIDATION_ERROR',
+          [{ field: 'description', message: 'No debe superar 300 caracteres.' }]
+        )
+      );
+      return;
+    }
+  }
+
   res.locals.taskTitle = title.trim();
+  res.locals.taskDescription = normalizedDescription;
   next();
 };
